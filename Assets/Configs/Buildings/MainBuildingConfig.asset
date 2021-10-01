@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9533cc0e25055e74c976d54c2a51a56c, type: 3}
+  m_Name: MainBuildingConfig
+  m_EditorClassIdentifier: 
+  <Health>k__BackingField: 200
+  <MaxHealth>k__BackingField: 1000
+  <Icon>k__BackingField: {fileID: 21300000, guid: 5842b2102e023584481a17f9651ef0e1, type: 3}
+  <RedRaceMaterial>k__BackingField: {fileID: 2100000, guid: 28f1f5027cc2df845b1115060c5a8b7d, type: 2}
+  <BlueRaceMaterial>k__BackingField: {fileID: 2100000, guid: 1722a440b9034c843b0c74cf2f118b12, type: 2}
+  <BrownRaceMaterial>k__BackingField: {fileID: 2100000, guid: 19ef6e442c64c2b4f8f85f749e4ea7a7, type: 2}
