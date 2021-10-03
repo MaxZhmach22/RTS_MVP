@@ -5,6 +5,7 @@ nameof(SelectableValue), order = 0)]
 public class SelectableValue : ScriptableObject
 {
     public ISelectable CurrentValue { get; private set; }
+    public bool isSelected;
     public Action<ISelectable> OnSelected;
     public void SetValue(ISelectable value)
     {

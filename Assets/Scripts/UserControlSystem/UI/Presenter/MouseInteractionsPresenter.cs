@@ -24,5 +24,6 @@ public class MouseInteractionsPresenter : MonoBehaviour
             .Where(c => c != null)
             .FirstOrDefault();
         _selectedObject.SetValue(selectable);
+        _selectedObject.isSelected = true;
     }
 }

@@ -8,6 +8,7 @@ public class MainBuilding : MonoBehaviour, ISelectable, IUnitProducer
     [SerializeField] private Transform _unitsParent;
     [SerializeField] BaseBuildingConfig _buildingConfig;
     [SerializeField] private RaceType _raceType;
+    [SerializeField] private Outline _outline;
     private float _health;
     private float _maxHealth;
     private Sprite _icon;
@@ -18,12 +19,14 @@ public class MainBuilding : MonoBehaviour, ISelectable, IUnitProducer
 
     public Sprite Icon => _icon;
 
+
     private void Awake()
     {
         _health = _buildingConfig.Health;
         _maxHealth = _buildingConfig.MaxHealth;
         _icon = _buildingConfig.Icon;
         CheckRaceType(_raceType);
+        _outline.enabled = false;
     }
 
     public void ProduceUnit()
@@ -37,12 +40,15 @@ public class MainBuilding : MonoBehaviour, ISelectable, IUnitProducer
         {
             case RaceType.Red:
                 ChangeColorOfStripes(_buildingConfig.RedRaceMaterial);
+                _outline.OutlineColor = Color.red;
                 break;
             case RaceType.Blue:
                 ChangeColorOfStripes(_buildingConfig.BlueRaceMaterial);
+                _outline.OutlineColor = Color.blue;
                 break;
             case RaceType.Brown:
                 ChangeColorOfStripes(_buildingConfig.BrownRaceMaterial);
+                _outline.OutlineColor = Color.gray;
                 break;
         }
     }
@@ -61,5 +67,10 @@ public class MainBuilding : MonoBehaviour, ISelectable, IUnitProducer
             meshRenderer.materials = newMeshRenderersMaterials;
         }
 
+    }
+
+    public void ShowOutline(bool state)
+    {
+        _outline.enabled = state;
     }
 }
