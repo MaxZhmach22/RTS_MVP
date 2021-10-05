@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class BottomLefPresenter : MonoBehaviour
+public class BottomLeftPresenter : MonoBehaviour
 {
     [SerializeField] private Image _selectedImage;
     [SerializeField] private Slider _healthSlider;
@@ -36,7 +36,6 @@ public class BottomLefPresenter : MonoBehaviour
             _sliderBackground.color = color * 0.5f;
             _sliderFillImage.color = color;
             _sliderFillImage.fillAmount = _healthSlider.value / _healthSlider.maxValue;
-            selected.ShowOutline(true);
         }
         else
             CheckBeforeSelectedObject();
@@ -47,7 +46,5 @@ public class BottomLefPresenter : MonoBehaviour
     {
         if (_beforeSelectedObject == null)
             return;
-
-        _beforeSelectedObject.ShowOutline(false);
     }
 }
