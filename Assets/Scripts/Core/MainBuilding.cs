@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainBuilding : MonoBehaviour, ISelectable, IUnitProducer
+public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable
 {
-    [SerializeField] private GameObject _unitPrefab;
     [SerializeField] private Transform _unitsParent;
     [SerializeField] BaseBuildingConfig _buildingConfig;
     [SerializeField] private RaceType _raceType;
@@ -28,11 +27,6 @@ public class MainBuilding : MonoBehaviour, ISelectable, IUnitProducer
         CheckRaceType(_raceType);
     }
 
-    public void ProduceUnit()
-    {
-        Instantiate(_unitPrefab, new Vector3(Random.Range(-10, 10), 0,
-        Random.Range(-10, 10)), Quaternion.identity, _unitsParent);
-    }
     private void CheckRaceType(RaceType raceType)
     {
         switch (raceType)
@@ -65,4 +59,9 @@ public class MainBuilding : MonoBehaviour, ISelectable, IUnitProducer
 
     }
 
+    public override void ExecuteSpecificCommand(IProduceUnitCommand command)
+    {
+        Instantiate(command.UnitPrefab, new Vector3(Random.Range(-10, 10), 0,
+        Random.Range(-10, 10)), Quaternion.identity, _unitsParent);
+    }
 }
