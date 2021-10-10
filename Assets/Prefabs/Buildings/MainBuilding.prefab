@@ -319,9 +319,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29aa87d2b4f555941af69b27edff1743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitPrefab: {fileID: 0}
-  _unitsParent: {fileID: 0}
-  _buildingConfig: {fileID: 0}
+  _unitPrefab: {fileID: 8955391516694792640, guid: b8190e4591a5b7e46969f87ed6c26af1, type: 3}
+  _unitsParent: {fileID: 2079716830357520190}
+  _buildingConfig: {fileID: 11400000, guid: bbf51d41833b57f4cb6c57822fd8e75a, type: 2}
   _raceType: 0
 --- !u!114 &2124359759566998715
 MonoBehaviour:

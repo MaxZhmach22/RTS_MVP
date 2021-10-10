@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainBuilding : MonoBehaviour, ISelectable, IUnitProducer
+public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable
 {
-    [SerializeField] private GameObject _unitPrefab;
     [SerializeField] private Transform _unitsParent;
     [SerializeField] BaseBuildingConfig _buildingConfig;
     [SerializeField] private RaceType _raceType;
-    [SerializeField] private Outline _outline;
+
     private float _health;
     private float _maxHealth;
     private Sprite _icon;
@@ -26,29 +25,20 @@ public class MainBuilding : MonoBehaviour, ISelectable, IUnitProducer
         _maxHealth = _buildingConfig.MaxHealth;
         _icon = _buildingConfig.Icon;
         CheckRaceType(_raceType);
-        _outline.enabled = false;
     }
 
-    public void ProduceUnit()
-    {
-        Instantiate(_unitPrefab, new Vector3(Random.Range(-10, 10), 0,
-        Random.Range(-10, 10)), Quaternion.identity, _unitsParent);
-    }
     private void CheckRaceType(RaceType raceType)
     {
         switch (raceType)
         {
             case RaceType.Red:
                 ChangeColorOfStripes(_buildingConfig.RedRaceMaterial);
-                _outline.OutlineColor = Color.red;
                 break;
             case RaceType.Blue:
                 ChangeColorOfStripes(_buildingConfig.BlueRaceMaterial);
-                _outline.OutlineColor = Color.blue;
                 break;
             case RaceType.Brown:
                 ChangeColorOfStripes(_buildingConfig.BrownRaceMaterial);
-                _outline.OutlineColor = Color.gray;
                 break;
         }
     }
@@ -69,8 +59,9 @@ public class MainBuilding : MonoBehaviour, ISelectable, IUnitProducer
 
     }
 
-    public void ShowOutline(bool state)
+    public override void ExecuteSpecificCommand(IProduceUnitCommand command)
     {
-        _outline.enabled = state;
+        Instantiate(command.UnitPrefab, new Vector3(Random.Range(-10, 10), 0,
+        Random.Range(-10, 10)), Quaternion.identity, _unitsParent);
     }
 }
