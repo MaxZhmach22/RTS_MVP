@@ -3,14 +3,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = nameof(SelectableValue), menuName = "Strategy Game/" +
 nameof(SelectableValue), order = 0)]
-public class SelectableValue : ScriptableObject
+public class SelectableValue : BaseScriptableValue<ISelectable>
 {
-    public ISelectable CurrentValue { get; private set; }
-    public bool isSelected;
-    public Action<ISelectable> OnSelected;
-    public void SetValue(ISelectable value)
-    {
-        CurrentValue = value;
-        OnSelected?.Invoke(value);
-    }
+   
 }
