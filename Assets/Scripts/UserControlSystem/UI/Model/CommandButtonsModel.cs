@@ -29,7 +29,7 @@ public class CommandButtonsModel
         _stopper.ProcessCommandExecutor(commandExecutor, command =>
         executeCommandWrapper(commandExecutor, command));
         _mover.ProcessCommandExecutor(commandExecutor, command =>
-        executeCommandWrapper(commandExecutor, command));
+        executeCommandWrapper(commandExecutor, command)); //TODO 5. 
         _patroller.ProcessCommandExecutor(commandExecutor, command =>
         executeCommandWrapper(commandExecutor, command));
     }
