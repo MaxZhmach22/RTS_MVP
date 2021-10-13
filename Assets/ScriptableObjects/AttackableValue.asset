@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51b309866730cfa43aab6eb42ed3724a, type: 3}
-  m_Name: TargetForAttackRMB
+  m_Script: {fileID: 11500000, guid: 9d5c27a14880a6a4683b37c23e212bff, type: 3}
+  m_Name: AttackableValue
   m_EditorClassIdentifier: 

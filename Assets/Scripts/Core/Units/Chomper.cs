@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Chomper : MonoBehaviour, ISelectable
+public class Chomper : MonoBehaviour, ISelectable, IAttackable
 {
     [SerializeField] private ChomperConfig _chomperConfig;
     

@@ -2595,9 +2595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc30330122771b04fa76b0b00f42f33c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _legacyContext: {fileID: 11400000, guid: de014ed798b17b243ab6163ff2054a84, type: 2}
-  _vector3Value: {fileID: 11400000, guid: 7e41a92eae6c32343b409b9bebcf6e9d, type: 2}
-  _targetForAttack: {fileID: 11400000, guid: 8cd724aa9c8a03a4f97a6192d8492d3b, type: 2}
 --- !u!114 &591729779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2611,7 +2608,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 591729778}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:

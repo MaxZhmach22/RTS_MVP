@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class BaseScriptableValue<T> : ScriptableObject, IScriptableValue<T> /*TODO IAwaitable<T>*/
+public abstract class BaseScriptableValue<T> : ScriptableObject, IScriptableValue<T>, IAwaitable<T>
 {
-    public class NewValueNotifier<TAwaited>  /*TODO IAwaiter<TAwaited>*/
+    public class NewValueNotifier<TAwaited> : IAwaiter<TAwaited>
     {
         private readonly BaseScriptableValue<TAwaited> _baseScriptableValue;
         private TAwaited _result;
@@ -35,7 +35,8 @@ public abstract class BaseScriptableValue<T> : ScriptableObject, IScriptableValu
                 _continuation = continuation;
             }
         }
-        public bool IsComppleted => _isCompleted;
+        public bool IsCompleted => _isCompleted;
+
         public TAwaited GetResult() => _result;
     }
 
@@ -50,9 +51,9 @@ public abstract class BaseScriptableValue<T> : ScriptableObject, IScriptableValu
         OnNewValue?.Invoke(value);
     }
 
-    //TODO public IAwaiter<T> GetAwaiter()
-    //{
-    //    return new NewValueNotifier<T>(this);
-    //}
+    public IAwaiter<T> GetAwaiter()
+    {
+        return new NewValueNotifier<T>(this);
+    }
 
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable
+public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable, IAttackable
 {
     [SerializeField] private Transform _unitsParent;
     [SerializeField] BaseBuildingConfig _buildingConfig;
