@@ -2,7 +2,11 @@
 
 public class AttackCommand : IAttackCommand
 {
-    public void Attack() =>
-        Debug.Log("Is Attacking");
 
+    public ISelectable Target { get; }
+
+    public AttackCommand(ISelectable target)
+    {
+        Target = target;
+    }
 }

@@ -1,4 +1,4 @@
 ﻿public interface IAttackCommand : ICommand
 {
-    void Attack();
+    ISelectable Target { get; }
 }

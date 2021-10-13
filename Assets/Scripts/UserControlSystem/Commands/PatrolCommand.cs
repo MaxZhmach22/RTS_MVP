@@ -2,7 +2,12 @@
 
 public class PatrolCommand : IPatrolCommand
 {
-    public void Patrol() =>
-        Debug.Log("IsPatroling");
-    
+
+    public Vector3 PointToPatrol { get; }
+
+    public PatrolCommand(Vector3 pointToPatrol)
+    {
+        PointToPatrol = pointToPatrol;
+    }
+
 }

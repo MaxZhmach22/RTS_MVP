@@ -1,8 +1,9 @@
+using UnityEngine;
 
 public class UnitPatrol : CommandExecutorBase<IPatrolCommand>
 {
     public override void ExecuteSpecificCommand(IPatrolCommand command)
     {
-        command.Patrol();
+        Debug.Log($"{name} is patrolling between {gameObject.transform.position} & {command.PointToPatrol}");
     }
 }

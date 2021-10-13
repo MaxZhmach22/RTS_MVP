@@ -1,4 +1,6 @@
-﻿public interface IPatrolCommand : ICommand
+﻿using UnityEngine;
+
+public interface IPatrolCommand : ICommand
 {
-    void Patrol();
+   Vector3 PointToPatrol { get; }
 }

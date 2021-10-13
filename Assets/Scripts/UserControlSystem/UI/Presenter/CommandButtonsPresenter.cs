@@ -1,26 +1,32 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class CommandButtonsPresenter : MonoBehaviour
+public class CommandButtonsPresenter : MonoBehaviour 
 {
     [SerializeField] private SelectableValue _selectable;
     [SerializeField] private CommandButtonsView _view;
-    [SerializeField] private AssetsContext _context;
+    [Inject] private CommandButtonsModel _model;
 
     private ISelectable _currentSelectable;
-
     private void Start()
     {
-        _selectable.OnSelected += onSelected;
+        _view.OnClick += _model.OnCommandButtonClicked;
+        _model.OnCommandSent += _view.UnblockAllInteractions;
+        _model.OnCommandCancel += _view.UnblockAllInteractions;
+        _model.OnCommandAccepted += _view.BlockInteractions;
+        _selectable.OnNewValue += onSelected;
         onSelected(_selectable.CurrentValue);
-        _view.OnClick += onButtonClick;
     }
     private void onSelected(ISelectable selectable)
     {
         if (_currentSelectable == selectable)
         {
             return;
+        }
+        if (_currentSelectable != null)
+        {
+            _model.OnSelectionChanged();
         }
         _currentSelectable = selectable;
         _view.Clear();
@@ -31,43 +37,5 @@ public class CommandButtonsPresenter : MonoBehaviour
             Component).GetComponentsInParent<ICommandExecutor>());
             _view.MakeLayout(commandExecutors);
         }
-        
     }
-    private void onButtonClick(ICommandExecutor commandExecutor)
-    { 
-        var unitProducer = commandExecutor as
-        CommandExecutorBase<IProduceUnitCommand>;
-        if (unitProducer != null)
-        {
-            unitProducer.ExecuteSpecificCommand(_context.Inject(new ProduceUnitCommandHeir()));
-            return;
-        }
-        var attack = commandExecutor as CommandExecutorBase<IAttackCommand>;
-        if (attack != null)
-        {
-            attack.ExecuteCommand(new AttackCommand());
-            return;
-        }
-        var move = commandExecutor as CommandExecutorBase<IMoveCommand>;
-        if (move != null)
-        {
-            move.ExecuteCommand(new MoveCommand());
-            return;
-        }  
-        var patrol = commandExecutor as CommandExecutorBase<IPatrolCommand>;
-        if (patrol != null)
-        {
-            patrol.ExecuteCommand(new PatrolCommand());
-            return;
-        }
-        var stop = commandExecutor as CommandExecutorBase<IStopCommand>;
-        if (stop != null)
-        {
-            stop.ExecuteCommand(new StopCommand());
-            return;
-        }
-        throw new
-        ApplicationException($"{nameof(CommandButtonsPresenter)}.{nameof(onButtonClick)}: Unknown type of commands executor: { commandExecutor.GetType().FullName }!");
-    }
-
 }

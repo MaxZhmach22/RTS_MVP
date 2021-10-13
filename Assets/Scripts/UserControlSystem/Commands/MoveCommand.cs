@@ -1,7 +1,9 @@
 using UnityEngine;
-
-public class MoveCommand : IMoveCommand 
+public class MoveCommand : IMoveCommand
 {
-    public void Move() =>
-        Debug.Log("IsMoving");
+    public Vector3 Target { get; }
+    public MoveCommand(Vector3 target)
+    {
+        Target = target;
+    }
 }
