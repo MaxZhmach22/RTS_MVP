@@ -21,6 +21,7 @@ public class UnitMovementStop : MonoBehaviour, IAwaitable<AsyncExtensions.Void>
     }
 
     public event Action OnStop;
+    public bool IsMoving { get; private set; }
 
     [SerializeField] private NavMeshAgent _agent;
     void Update()
@@ -32,7 +33,9 @@ public class UnitMovementStop : MonoBehaviour, IAwaitable<AsyncExtensions.Void>
                 if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
                 {
                     OnStop?.Invoke();
+                    IsMoving = false;
                 }
+                IsMoving = true;
             }
         }
     }
