@@ -4958,7 +4958,7 @@ MonoBehaviour:
   _eventSystem: {fileID: 1983474371}
   _camera: {fileID: 963194227}
   _selectedObject: {fileID: 11400000, guid: b330914691cb9de4b8f2b6469a4a8927, type: 2}
-  _targetForAttack: {fileID: 11400000, guid: 8cd724aa9c8a03a4f97a6192d8492d3b, type: 2}
+  _targetForAttack: {fileID: 11400000, guid: 895703b738d72b34f84a795cf5aa2515, type: 2}
   _groundClicksRMB: {fileID: 11400000, guid: 7e41a92eae6c32343b409b9bebcf6e9d, type: 2}
   _groundTransform: {fileID: 612950167}
 --- !u!4 &1506382080

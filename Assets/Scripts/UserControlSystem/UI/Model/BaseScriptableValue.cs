@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public abstract class BaseScriptableValue<T> : ScriptableObject, IScriptableValue<T>, IAwaitable<T>
 {
-    public class NewValueNotifier<TAwaited> : IAwaiter<TAwaited>
+    public class NewValueNotifier<TAwaited> : IAwaiter<TAwaited>, INotifyCompletion
     {
         private readonly BaseScriptableValue<TAwaited> _baseScriptableValue;
         private TAwaited _result;
@@ -53,7 +54,7 @@ public abstract class BaseScriptableValue<T> : ScriptableObject, IScriptableValu
 
     public IAwaiter<T> GetAwaiter()
     {
-        return new NewValueNotifier<T>(this);
+        return new NewValueNotifier<T>(this); //Возвращаемый объект должен реализовывать IAwaiter
     }
 
 }

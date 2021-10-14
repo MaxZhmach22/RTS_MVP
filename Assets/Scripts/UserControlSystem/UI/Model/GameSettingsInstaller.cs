@@ -11,6 +11,9 @@ public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInsta
 
     public override void InstallBindings()
     {
+        Container.Bind<AttackableValue>().FromInstance(_targetForAttack);
+        Container.Bind<Vector3Value>().FromInstance(_vector3Value);
+        Container.Bind<SelectableValue>().FromInstance(_selectableValue);
         Container.Bind<IAwaitable<Vector3>>().FromInstance(_vector3Value);
         Container.Bind<IAwaitable<IAttackable>>().FromInstance(_targetForAttack);
         Container.Bind<IAwaitable<ISelectable>>().FromInstance(_selectableValue);
