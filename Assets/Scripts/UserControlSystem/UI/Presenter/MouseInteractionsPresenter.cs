@@ -31,7 +31,9 @@ public class MouseInteractionsPresenter : MonoBehaviour
         {
             if (WeHit<ISelectable>(hits, out var selectable))
             {
+                
                 _selectedObject.SetValue(selectable);
+
             }
             else
             {
