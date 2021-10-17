@@ -1,7 +1,20 @@
+using UnityEngine;
+using UnityEngine.AI;
+
 public class UnitStop : CommandExecutorBase<IStopCommand>
 {
-    public override void ExecuteSpecificCommand(IStopCommand command)
+    [SerializeField] private UnitMovementStop _stop;
+    [SerializeField] private Animator _animator;
+
+    public override async void ExecuteSpecificCommand(IStopCommand command)
     {
-        command.Stop();
+        if (_stop.IsMoving)
+        {
+            GetComponent<NavMeshAgent>().ResetPath();
+            await _stop;
+            _animator.SetTrigger("Idle");
+        }
+       
     }
+
 }

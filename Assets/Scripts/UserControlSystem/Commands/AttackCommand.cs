@@ -3,9 +3,9 @@
 public class AttackCommand : IAttackCommand
 {
 
-    public ISelectable Target { get; }
+    public IAttackable Target { get; }
 
-    public AttackCommand(ISelectable target)
+    public AttackCommand(IAttackable target)
     {
         Target = target;
     }

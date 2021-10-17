@@ -9,4 +9,6 @@ public class BaseUnitConfig : ScriptableObject
 
     [field: SerializeField] public Sprite Icon { get; private set; }
 
+    [field: SerializeField] public float TimeToSpawn { get; private set; }
+
 }

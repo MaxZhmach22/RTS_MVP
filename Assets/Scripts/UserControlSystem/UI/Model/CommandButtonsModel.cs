@@ -24,12 +24,16 @@ public class CommandButtonsModel
         OnCommandAccepted?.Invoke(commandExecutor);
         _unitProducer.ProcessCommandExecutor(commandExecutor, command =>
         executeCommandWrapper(commandExecutor, command));
+
         _attacker.ProcessCommandExecutor(commandExecutor, command =>
         executeCommandWrapper(commandExecutor, command));
+
         _stopper.ProcessCommandExecutor(commandExecutor, command =>
         executeCommandWrapper(commandExecutor, command));
+
         _mover.ProcessCommandExecutor(commandExecutor, command =>
-        executeCommandWrapper(commandExecutor, command)); //TODO 5. 
+        executeCommandWrapper(commandExecutor, command));
+        //TODO 5. 
         _patroller.ProcessCommandExecutor(commandExecutor, command =>
         executeCommandWrapper(commandExecutor, command));
     }

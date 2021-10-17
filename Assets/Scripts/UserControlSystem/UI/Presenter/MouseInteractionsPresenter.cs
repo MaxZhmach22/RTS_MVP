@@ -7,7 +7,7 @@ public class MouseInteractionsPresenter : MonoBehaviour
     [SerializeField] private EventSystem _eventSystem;
     [SerializeField] private Camera _camera;
     [SerializeField] private SelectableValue _selectedObject;
-    [SerializeField] private SelectableValue _targetForAttack;
+    [SerializeField] private AttackableValue _targetForAttack;
     [SerializeField] private Vector3Value _groundClicksRMB;
     [SerializeField] private Transform _groundTransform;
 
@@ -26,34 +26,41 @@ public class MouseInteractionsPresenter : MonoBehaviour
             return;
 
         var ray = _camera.ScreenPointToRay(Input.mousePosition);
-
+        var hits = Physics.RaycastAll(ray);
         if (Input.GetMouseButtonUp(0))
         {
-            var selectable = CheckClickedObject(ray);
-            _selectedObject.SetValue(selectable);
+            if (WeHit<ISelectable>(hits, out var selectable))
+            {
+                
+                _selectedObject.SetValue(selectable);
+
+            }
+            else
+            {
+                _selectedObject.SetValue(null);
+            }
         }
         else
         {
-            if (_groundPlane.Raycast(ray, out var enter))
-                _groundClicksRMB.SetValue(ray.origin + ray.direction * enter); //TODO 1.Устанавливаем значение в Vector3value
-            var selectable = CheckClickedObject(ray);
-            if (selectable != _selectedObject.CurrentValue)
-                _targetForAttack.SetValue(selectable);
+            if (WeHit<IAttackable>(hits, out var attackable))
+                _targetForAttack.SetValue(attackable);
+            else if (_groundPlane.Raycast(ray, out var enter))
+            {
+                _groundClicksRMB.SetValue(ray.origin + ray.direction * enter);
+            }
         }
     }
 
-    private ISelectable CheckClickedObject(Ray ray)
+    private bool WeHit<T>(RaycastHit[] hits, out T result) where T : class
     {
-        var hits = Physics.RaycastAll(ray);
+        result = default;
         if (hits.Length == 0)
         {
-            return null;
+            return false;
         }
-        var selectable = hits
-        .Select(hit =>
-        hit.collider.GetComponentInParent<ISelectable>())
-        .Where(c => c != null)
-        .FirstOrDefault();
-        return selectable;
+        result = hits
+            .Select(hit => hit.collider.GetComponentInParent<T>())
+            .FirstOrDefault(c => c != null);
+        return result != default;
     }
 }
