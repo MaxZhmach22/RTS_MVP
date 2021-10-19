@@ -2,8 +2,17 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
+using UniRx;
+using System;
+
 public class MouseInteractionsPresenter : MonoBehaviour
 {
+    private enum MouseCLick
+    {
+        RightMouseClick,
+        LeftMouseClick
+    }
+
     [SerializeField] private EventSystem _eventSystem;
     [SerializeField] private Camera _camera;
     [SerializeField] private SelectableValue _selectedObject;
@@ -16,37 +25,34 @@ public class MouseInteractionsPresenter : MonoBehaviour
     private void Start()
     {
         _groundPlane = new Plane(_groundTransform.up, 0);
+        var leftMouseClickStream = Observable.EveryUpdate().Where(_ => Input.GetMouseButtonUp(0));
+        leftMouseClickStream.Subscribe(lc => RaycastHit(MouseCLick.LeftMouseClick));
+        var rightMouseClickStream = Observable.EveryUpdate().Where(_ => Input.GetMouseButtonUp(1));
+        rightMouseClickStream.Subscribe(rc => RaycastHit(MouseCLick.RightMouseClick)); 
     }
 
-    private void Update()
+    private void RaycastHit(MouseCLick mouseCLick)
     {
-        if (!Input.GetMouseButtonUp(0) && !Input.GetMouseButton(1))
-            return;
         if (_eventSystem.IsPointerOverGameObject())
             return;
-
-        var ray = _camera.ScreenPointToRay(Input.mousePosition);
-        var hits = Physics.RaycastAll(ray);
-        if (Input.GetMouseButtonUp(0))
         {
-            if (WeHit<ISelectable>(hits, out var selectable))
-            {
-                
-                _selectedObject.SetValue(selectable);
+            var ray = _camera.ScreenPointToRay(Input.mousePosition);
+            var hits = Physics.RaycastAll(ray);
 
-            }
-            else
+            switch (mouseCLick)
             {
-                _selectedObject.SetValue(null);
-            }
-        }
-        else
-        {
-            if (WeHit<IAttackable>(hits, out var attackable))
-                _targetForAttack.SetValue(attackable);
-            else if (_groundPlane.Raycast(ray, out var enter))
-            {
-                _groundClicksRMB.SetValue(ray.origin + ray.direction * enter);
+                case MouseCLick.LeftMouseClick:
+                    if (WeHit<ISelectable>(hits, out var selectable))
+                        _selectedObject.SetValue(selectable);
+                    else
+                        _selectedObject.SetValue(null);
+                    break;
+                case MouseCLick.RightMouseClick:
+                    if (WeHit<IAttackable>(hits, out var attackable))
+                        _targetForAttack.SetValue(attackable);
+                    else if (_groundPlane.Raycast(ray, out var enter))
+                        _groundClicksRMB.SetValue(ray.origin + ray.direction * enter);
+                    break;
             }
         }
     }
