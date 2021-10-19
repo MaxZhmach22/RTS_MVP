@@ -1,9 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Zenject;
 using UniRx;
-using System;
 
 public class MouseInteractionsPresenter : MonoBehaviour
 {
