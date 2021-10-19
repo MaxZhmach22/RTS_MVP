@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 public abstract class BaseScriptableValue<T> : ScriptableObject, IScriptableValue<T>, IAwaitable<T>
@@ -26,7 +27,7 @@ public abstract class BaseScriptableValue<T> : ScriptableObject, IScriptableValu
 
     public event Action<T> OnNewValue;
 
-    public void SetValue(T value)
+    public virtual void SetValue(T value)
     {
         CurrentValue = value;
         OnNewValue?.Invoke(value);
