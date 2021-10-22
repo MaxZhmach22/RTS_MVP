@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -18,6 +19,6 @@ public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInsta
         Container.Bind<IAwaitable<IAttackable>>().FromInstance(_targetForAttack);
         Container.Bind<IAwaitable<ISelectable>>().FromInstance(_selectableValue);
         Container.Bind<AssetsContext>().FromInstance(_legacyContext);
-        
+        Container.Bind<IObservable<ISelectable>>().FromInstance(_selectableValue);
     }
 }

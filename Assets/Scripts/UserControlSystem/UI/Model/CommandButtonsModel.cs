@@ -1,7 +1,9 @@
 using System;
 using Zenject;
+
 public class CommandButtonsModel
 {
+
     public event Action<ICommandExecutor> OnCommandAccepted;
     public event Action OnCommandSent;
     public event Action OnCommandCancel;
