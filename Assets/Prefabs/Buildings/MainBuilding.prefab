@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 2079716830374701982}
   - component: {fileID: 3174013002159131537}
   - component: {fileID: 2124359759566998715}
+  - component: {fileID: 5504868689687825080}
   m_Layer: 0
   m_Name: MainBuilding
   m_TagString: Untagged
@@ -319,7 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29aa87d2b4f555941af69b27edff1743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitPrefab: {fileID: 8955391516694792640, guid: b8190e4591a5b7e46969f87ed6c26af1, type: 3}
   _unitsParent: {fileID: 2079716830357520190}
   _buildingConfig: {fileID: 11400000, guid: bbf51d41833b57f4cb6c57822fd8e75a, type: 2}
   _raceType: 0
@@ -17845,6 +17845,20 @@ MonoBehaviour:
     - {x: 0.27605695, y: 0.96057945, z: -0.032857105}
     - {x: -0.13348849, y: 0.7803123, z: 0.6109775}
     - {x: 0.47771823, y: 0.6973131, z: 0.5343593}
+--- !u!114 &5504868689687825080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079716830357480222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ebebdaa43bb9bb428651987fa682363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitsParent: {fileID: 0}
+  _maximumUnitsInQueue: 6
 --- !u!1 &2570559584746193250
 GameObject:
   m_ObjectHideFlags: 0

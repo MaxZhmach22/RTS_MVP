@@ -13,6 +13,8 @@ public class Chomper : MonoBehaviour, ISelectable, IAttackable
 
     public float TimeToSpawn => _timeToSpawn;
 
+    public Transform PivotPoint => throw new System.NotImplementedException();
+
     void Start()
     {
         Health = _chomperConfig.Health;

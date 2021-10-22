@@ -19,6 +19,7 @@ public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectabl
 
     public Sprite Icon => _icon;
 
+    public Transform PivotPoint => throw new System.NotImplementedException();
 
     private void Awake()
     {
