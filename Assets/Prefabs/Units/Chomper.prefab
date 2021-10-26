@@ -2740,13 +2740,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8955391516694828512}
   - component: {fileID: 8955391516704160258}
+  - component: {fileID: 8159541089984600409}
   - component: {fileID: 4071327094602516669}
   - component: {fileID: 2411974474846272496}
   - component: {fileID: 4026179550616994129}
   - component: {fileID: -5843636134842631408}
   - component: {fileID: 7465171170789307402}
   - component: {fileID: 6916497553103385101}
-  - component: {fileID: 8159541089984600409}
   - component: {fileID: 2874074040689066103}
   m_Layer: 0
   m_Name: Chomper
@@ -2791,6 +2791,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!195 &8159541089984600409
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8955391516694792640}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &4071327094602516669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2874,28 +2896,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stop: {fileID: 2874074040689066103}
   _animator: {fileID: 8955391516704160258}
---- !u!195 &8159541089984600409
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8955391516694792640}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &2874074040689066103
 MonoBehaviour:
   m_ObjectHideFlags: 0

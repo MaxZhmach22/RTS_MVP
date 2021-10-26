@@ -3,7 +3,6 @@ using Zenject;
 
 public class CommandButtonsModel
 {
-
     public event Action<ICommandExecutor> OnCommandAccepted;
     public event Action OnCommandSent;
     public event Action OnCommandCancel;
@@ -16,6 +15,11 @@ public class CommandButtonsModel
 
     private bool _commandIsPending;
 
+
+    /// <summary>
+    /// Метод, который получает команду от _view, передает в аргумент commandExecutor.
+    /// </summary>
+    /// <param name="commandExecutor"></param>
     public void OnCommandButtonClicked(ICommandExecutor commandExecutor)
     {
         if (_commandIsPending)
@@ -23,7 +27,8 @@ public class CommandButtonsModel
             processOnCancel();
         }
         _commandIsPending = true;
-        OnCommandAccepted?.Invoke(commandExecutor);
+        OnCommandAccepted?.Invoke(commandExecutor); 
+
         _unitProducer.ProcessCommandExecutor(commandExecutor, command =>
         executeCommandWrapper(commandExecutor, command));
 

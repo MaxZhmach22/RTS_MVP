@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class CommandButtonsView : MonoBehaviour
 {
     public Action<ICommandExecutor> OnClick;
@@ -50,7 +51,12 @@ public class CommandButtonsView : MonoBehaviour
         _stopButton.GetComponent<Selectable>().interactable = value;
         _produceUnitButton.GetComponent<Selectable>().interactable = value;
     }
-
+    /// <summary>
+    /// Получаем список скриптов комманд <see cref="ICommandExecutor"></see> от выбранного объекта,
+    /// методом <see cref="GetButtonGameObjectByType"></see> получаем конткретную кнопку. Сделали её активной, получили компонент
+    /// Button и подписали методом-пустышкой, который всего лишь вызыввает событие <see cref="OnClick"/> и передает (currentExecutor);
+    /// </summary>
+    /// <param name="commandExecutors"></param>
     public void MakeLayout(IEnumerable<ICommandExecutor> commandExecutors)
     {
         foreach (var currentExecutor in commandExecutors)
@@ -64,6 +70,12 @@ public class CommandButtonsView : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Метод ищет в словаре <see cref="_buttonsByExecutorType"/> первое First() значение Value(), ключ которого
+    /// можно присвоить экземпляру типа указанного в аргументе(executorInstanceType).
+    /// </summary>
+    /// <param name="executorInstanceType"></param>
+    /// <returns></returns>
     private GameObject GetButtonGameObjectByType(Type executorInstanceType) //TODO синтаксис на заметку!
     {
         return _buttonsByExecutorType

@@ -9,6 +9,7 @@ public class BottomCenterPresenter : MonoBehaviour
     private IDisposable _productionQueueRemoveCt;
     private IDisposable _productionQueueReplaceCt;
     private IDisposable _cancelButtonCts;
+
     [Inject]
     private void Init(BottomCenterModel model, BottomCenterView view)
     {

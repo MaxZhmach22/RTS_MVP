@@ -14,16 +14,20 @@ public class CommandButtonsPresenter : MonoBehaviour
     private ISelectable _currentSelectable;
     private void Start()
     {
-        _selectedValues.Subscribe(onSelected);
+        _selectedValues.Subscribe(onSelected); //Подписка на реактивное свойство
 
-        _view.OnClick += _model.OnCommandButtonClicked;
+        _view.OnClick += _model.OnCommandButtonClicked; // OnClick передает нам 
         _model.OnCommandSent += _view.UnblockAllInteractions;
         _model.OnCommandCancel += _view.UnblockAllInteractions;
         _model.OnCommandAccepted += _view.BlockInteractions;
     }
 
-  
 
+    /// <summary>
+    /// Подписываемся этим методом на изменение значения _selectedValue <see cref="IObservable{T}"/>, берем все скрипты, 
+    /// которые реализуют <see cref="ICommandExecutor"/> и передаем <see cref="CommandButtonsView"/> список для отрисовки Layout
+    /// </summary>
+    /// <param name="selectable"></param>
     private void onSelected(ISelectable selectable)
     {
         if (_currentSelectable == selectable)
@@ -36,11 +40,12 @@ public class CommandButtonsPresenter : MonoBehaviour
         }
         _currentSelectable = selectable;
         _view.Clear();
+
         if (selectable != null)
         {
-            var commandExecutors = new List<ICommandExecutor>();
+            var commandExecutors = new List<ICommandExecutor>(); //Создаем список executor
             commandExecutors.AddRange((selectable as
-            Component).GetComponentsInParent<ICommandExecutor>());
+            Component).GetComponentsInParent<ICommandExecutor>()); 
             _view.MakeLayout(commandExecutors);
         }
     }
