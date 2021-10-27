@@ -6,33 +6,37 @@ using UnityEngine.UI;
 
 public class CommandButtonsView : MonoBehaviour
 {
-    public Action<ICommandExecutor> OnClick;
+    public Action<ICommandExecutor, ICommandsQueue> OnClick;
 
     [SerializeField] private GameObject _attackButton;
     [SerializeField] private GameObject _moveButton;
     [SerializeField] private GameObject _patrolButton;
     [SerializeField] private GameObject _stopButton;
     [SerializeField] private GameObject _produceUnitButton;
+    [SerializeField] private GameObject _gatheringPointButton;
 
     private Dictionary<Type, GameObject> _buttonsByExecutorType;
     private void Start()
     {
         _buttonsByExecutorType = new Dictionary<Type, GameObject>();
         _buttonsByExecutorType
-        .Add(typeof(CommandExecutorBase<IAttackCommand>),
+        .Add(typeof(ICommandExecutor<IAttackCommand>),
         _attackButton);
         _buttonsByExecutorType
-        .Add(typeof(CommandExecutorBase<IMoveCommand>),
+        .Add(typeof(ICommandExecutor<IMoveCommand>),
         _moveButton);
         _buttonsByExecutorType
-        .Add(typeof(CommandExecutorBase<IPatrolCommand>),
+        .Add(typeof(ICommandExecutor<IPatrolCommand>),
         _patrolButton);
         _buttonsByExecutorType
-        .Add(typeof(CommandExecutorBase<IStopCommand>),
+        .Add(typeof(ICommandExecutor<IStopCommand>),
         _stopButton);
         _buttonsByExecutorType
-        .Add(typeof(CommandExecutorBase<IProduceUnitCommand>),
+        .Add(typeof(ICommandExecutor<IProduceUnitCommand>),
         _produceUnitButton);
+        _buttonsByExecutorType
+        .Add(typeof(ICommandExecutor<IGatheringPoint>),
+        _gatheringPointButton);
     }
     public void BlockInteractions(ICommandExecutor ce)
     {
@@ -50,6 +54,8 @@ public class CommandButtonsView : MonoBehaviour
         _patrolButton.GetComponent<Selectable>().interactable = value;
         _stopButton.GetComponent<Selectable>().interactable = value;
         _produceUnitButton.GetComponent<Selectable>().interactable = value;
+        _gatheringPointButton.GetComponent<Selectable>().interactable = value;
+
     }
     /// <summary>
     /// Получаем список скриптов комманд <see cref="ICommandExecutor"></see> от выбранного объекта,
@@ -57,7 +63,7 @@ public class CommandButtonsView : MonoBehaviour
     /// Button и подписали методом-пустышкой, который всего лишь вызыввает событие <see cref="OnClick"/> и передает (currentExecutor);
     /// </summary>
     /// <param name="commandExecutors"></param>
-    public void MakeLayout(IEnumerable<ICommandExecutor> commandExecutors)
+    public void MakeLayout(IEnumerable<ICommandExecutor> commandExecutors, ICommandsQueue queue)
     {
         foreach (var currentExecutor in commandExecutors)
         {
@@ -65,8 +71,7 @@ public class CommandButtonsView : MonoBehaviour
             GetButtonGameObjectByType(currentExecutor.GetType());
             buttonGameObject.SetActive(true);
             var button = buttonGameObject.GetComponent<Button>();
-            button.onClick.AddListener(() =>
-            OnClick?.Invoke(currentExecutor));
+            button.onClick.AddListener(() => OnClick?.Invoke(currentExecutor, queue));
         }
     }
 

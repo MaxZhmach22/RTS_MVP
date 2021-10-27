@@ -23,20 +23,19 @@ public class BottomCenterPresenter : MonoBehaviour
         _uiHolder.SetActive(unitProducer != null);
         if (unitProducer != null)
         {
-            _productionQueueAddCt = unitProducer.Queue
-            .ObserveAdd()
-            .Subscribe(addEvent =>
-            view.SetTask(addEvent.Value, addEvent.Index)); 
+                _productionQueueAddCt = unitProducer.Queue
+                    .ObserveAdd()
+                    .Subscribe(addEvent => view.SetTask(addEvent.Value, addEvent.Index));
+
                 _productionQueueRemoveCt = unitProducer.Queue
- .ObserveRemove()
- .Subscribe(removeEvent => view.SetTask(null,
- removeEvent.Index));
+                    .ObserveRemove()
+                    .Subscribe(removeEvent => view.SetTask(null, removeEvent.Index));
+
                 _productionQueueReplaceCt = unitProducer.Queue
-                .ObserveReplace()
-                .Subscribe(replaceEvent =>
-                view.SetTask(replaceEvent.NewValue, replaceEvent.Index));
-                _cancelButtonCts =
-                view.CancelButtonClicks.Subscribe(unitProducer.Cancel);
+                    .ObserveReplace()
+                    .Subscribe(replaceEvent => view.SetTask(replaceEvent.NewValue, replaceEvent.Index));
+
+                _cancelButtonCts = view.CancelButtonClicks.Subscribe(unitProducer.Cancel);
                 for (int i = 0; i < unitProducer.Queue.Count; i++)
                 {
                     view.SetTask(unitProducer.Queue[i], i);

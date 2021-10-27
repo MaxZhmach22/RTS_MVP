@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,7 +7,7 @@ public class UnitStop : CommandExecutorBase<IStopCommand>
     [SerializeField] private UnitMovementStop _stop;
     [SerializeField] private Animator _animator;
 
-    public override async void ExecuteSpecificCommand(IStopCommand command)
+    public override async Task ExecuteSpecificCommand(IStopCommand command)
     {
         if (_stop.IsMoving)
         {

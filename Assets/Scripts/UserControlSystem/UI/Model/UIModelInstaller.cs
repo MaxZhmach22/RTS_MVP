@@ -8,17 +8,18 @@ public class UIModelInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-       
         Container.Bind<CommandCreatorBase<IProduceUnitCommand>>()
-        .To<ProduceUnitCommandCommandCreator>().AsTransient();
+                .To<ProduceUnitCommandCommandCreator>().AsTransient();
         Container.Bind<CommandCreatorBase<IAttackCommand>>()
-        .To<AttackCommandCommandCreator>().AsTransient();
+            .To<AttackCommandCommandCreator>().AsTransient();
         Container.Bind<CommandCreatorBase<IMoveCommand>>()
-        .To<MoveCommandCommandCreator>().AsTransient();
+            .To<MoveCommandCommandCreator>().AsTransient();
         Container.Bind<CommandCreatorBase<IPatrolCommand>>()
-        .To<PatrolCommandCommandCreator>().AsTransient();
+            .To<PatrolCommandCommandCreator>().AsTransient();
         Container.Bind<CommandCreatorBase<IStopCommand>>()
-        .To<StopCommandCommandCreator>().AsTransient();
+            .To<StopCommandCommandCreator>().AsTransient();
+        Container.Bind<CommandCreatorBase<IGatheringPoint>>()
+            .To<GatheringPointCommandCreator>().AsTransient();
 
         Container.Bind<CommandButtonsModel>().AsTransient();
 

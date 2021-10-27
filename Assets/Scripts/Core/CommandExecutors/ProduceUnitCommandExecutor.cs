@@ -1,5 +1,7 @@
-﻿using UniRx;
+﻿using System.Threading.Tasks;
+using UniRx;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -12,6 +14,7 @@ public class ProduceUnitCommandExecutor : CommandExecutorBase<IProduceUnitComman
 
     [SerializeField] private Transform _unitsParent;
     [SerializeField] private int _maximumUnitsInQueue = 6;
+    [Inject] private DiContainer _diContainer;
 
     private ReactiveCollection<IUnitProductionTask> _queue = new ReactiveCollection<IUnitProductionTask>();
 
@@ -19,8 +22,14 @@ public class ProduceUnitCommandExecutor : CommandExecutorBase<IProduceUnitComman
     {
         if (_queue.Count == 0)
             return;
-       
-        UnitProduce();
+
+        var innerTask = (UnitProductionTask)_queue[0];
+        innerTask.TimeLeft -= Time.deltaTime;
+        if (innerTask.TimeLeft <= 0)
+        {
+            removeTaskAtIndex(0);
+            Instantiate(innerTask.UnitPrefab, new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10)), Quaternion.identity, _unitsParent);
+        }
     }
     /// <summary>
     /// Метод, ищущий первую в реактивной коллеции задачу(Task) и 
@@ -28,18 +37,7 @@ public class ProduceUnitCommandExecutor : CommandExecutorBase<IProduceUnitComman
     /// если проверка пройдена, то убираем методом <see cref="removeTaskAtIndex(int)"/> из коллекции Item под индексом 0 
     /// и инстанциируем префаб <see cref="UnitProductionTask.UnitPrefab"/>.
     /// </summary>
-    private void UnitProduce()
-    {
-        var innerTask = (UnitProductionTask)_queue[0];
-        innerTask.TimeLeft -= Time.deltaTime;
-        if (innerTask.TimeLeft <= 0)
-        {
-            removeTaskAtIndex(0);
-            Instantiate(innerTask.UnitPrefab, new
-            Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10)),
-            Quaternion.identity, _unitsParent);
-        }
-    }
+    
 
     /// <summary>
     /// Метод Cancel, принимающий индекс отменяемого задания. Объявлен в интерфейсе <see cref="IUnitProducer"/>
@@ -64,8 +62,11 @@ public class ProduceUnitCommandExecutor : CommandExecutorBase<IProduceUnitComman
     /// При вызове метода происходит добавление в реактивную коллекцию item типа <see cref="IUnitProductionTask"/>
     /// </summary>
     /// <param name="command"></param>
-    public override void ExecuteSpecificCommand(IProduceUnitCommand command)
+    public override async Task ExecuteSpecificCommand(IProduceUnitCommand command)
     {
-        _queue.Add(new UnitProductionTask(command.ProductionTime, command.Icon, command.UnitPrefab, command.UnitName));
+        var instance = _diContainer.InstantiatePrefab(command.UnitPrefab, transform.position, Quaternion.identity, _unitsParent);
+        var queue = instance.GetComponent<ICommandsQueue>();
+        var mainBuilding = GetComponent<MainBuilding>();
+        queue.EnqueueCommand(new MoveCommand(mainBuilding.GatheringPoint));
     }
 }

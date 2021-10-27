@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable, IAttackable
+public class MainBuilding : MonoBehaviour, ISelectable, IAttackable
 {
     [SerializeField] private Transform _unitsParent;
     [SerializeField] BaseBuildingConfig _buildingConfig;
@@ -20,6 +20,8 @@ public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectabl
     public Sprite Icon => _icon;
 
     public Transform PivotPoint => throw new System.NotImplementedException();
+
+    public Vector3 GatheringPoint { get; set; }
 
     private void Awake()
     {
@@ -61,10 +63,5 @@ public class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectabl
 
     }
 
-    public async override void ExecuteSpecificCommand(IProduceUnitCommand command)
-    {
-        await Task.Delay((int)command.TimeToSpawn);
-        Instantiate(command.UnitPrefab, new Vector3(Random.Range(-10, 10), 0,
-        Random.Range(-10, 10)), Quaternion.identity, _unitsParent);
-    }
+   
 }
