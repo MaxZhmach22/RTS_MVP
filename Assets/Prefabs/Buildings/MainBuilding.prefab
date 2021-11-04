@@ -256,10 +256,12 @@ GameObject:
   - component: {fileID: 3174013002159131537}
   - component: {fileID: 2124359759566998715}
   - component: {fileID: 5504868689687825080}
+  - component: {fileID: 7423973077094804183}
+  - component: {fileID: 8440462264032493680}
   - component: {fileID: 8090727919493949495}
   - component: {fileID: 8755758766513158244}
-  - component: {fileID: 8440462264032493680}
-  - component: {fileID: 7423973077094804183}
+  - component: {fileID: 4344454923714042587}
+  - component: {fileID: 7019444180249476003}
   m_Layer: 0
   m_Name: MainBuilding
   m_TagString: Untagged
@@ -17863,6 +17865,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitsParent: {fileID: 0}
   _maximumUnitsInQueue: 6
+--- !u!114 &7423973077094804183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079716830357480222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42146c50383e4bd46b4bd2bf4fb3bed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8440462264032493680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079716830357480222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 7423973077094804183}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!114 &8090727919493949495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17887,7 +17919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a9f39d6298d9e4db53f7d1793f60fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8440462264032493680
+--- !u!114 &4344454923714042587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -17896,27 +17928,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 2079716830357480222}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Script: {fileID: 11500000, guid: fb65f7f6fa3711143bfda014fac4e564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
-  _monoInstallers:
-  - {fileID: 7423973077094804183}
-  _installerPrefabs: []
-  _autoRun: 1
-  _kernel: {fileID: 0}
---- !u!114 &7423973077094804183
-MonoBehaviour:
+  _factionId: 0
+--- !u!208 &7019444180249476003
+NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079716830357480222}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42146c50383e4bd46b4bd2bf4fb3bed5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.5, y: 0.5, z: 2.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2570559584746193250
 GameObject:
   m_ObjectHideFlags: 0

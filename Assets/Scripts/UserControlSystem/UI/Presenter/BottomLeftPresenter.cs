@@ -14,12 +14,8 @@ public class BottomLeftPresenter : MonoBehaviour
     [SerializeField] private Image _sliderFillImage;
     [Inject] private IObservable<ISelectable> _selectedValues;
 
-    private ISelectable _beforeSelectedObject;
+    private void Start() => _selectedValues.Subscribe(OnSelected);
 
-    private void Start()
-    {
-        _selectedValues.Subscribe(OnSelected);
-    }
     private void OnSelected(ISelectable selected)
     {
         _selectedImage.enabled = selected != null;
@@ -27,7 +23,7 @@ public class BottomLeftPresenter : MonoBehaviour
         _text.enabled = selected != null;
         if (selected != null)
         {
-            _beforeSelectedObject = selected;
+           
             _selectedImage.sprite = selected.Icon;
             _text.text = $"{selected.Health}/{selected.MaxHealth}";
             _healthSlider.minValue = 0;
@@ -40,14 +36,5 @@ public class BottomLeftPresenter : MonoBehaviour
             _sliderFillImage.color = color;
             _sliderFillImage.fillAmount = _healthSlider.value / _healthSlider.maxValue;
         }
-        else
-            CheckBeforeSelectedObject();
-
-    }
-
-    private void CheckBeforeSelectedObject()
-    {
-        if (_beforeSelectedObject == null)
-            return;
     }
 }

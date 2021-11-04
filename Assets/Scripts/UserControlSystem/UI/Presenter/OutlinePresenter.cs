@@ -18,7 +18,11 @@ public class OutlinePresenter : MonoBehaviour
     private void onSelected(ISelectable selectable)
     {
         if (_currentSelectable == selectable)
-            return; 
+            return;
+        if (this == null)
+        {
+            return;
+        }
 
         _currentSelectable = selectable;
         setSelected(_outlines, false);

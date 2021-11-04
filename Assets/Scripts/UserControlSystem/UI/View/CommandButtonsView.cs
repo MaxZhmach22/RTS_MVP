@@ -20,23 +20,17 @@ public class CommandButtonsView : MonoBehaviour
     {
         _buttonsByExecutorType = new Dictionary<Type, GameObject>();
         _buttonsByExecutorType
-        .Add(typeof(ICommandExecutor<IAttackCommand>),
-        _attackButton);
+            .Add(typeof(ICommandExecutor<IAttackCommand>), _attackButton);
         _buttonsByExecutorType
-        .Add(typeof(ICommandExecutor<IMoveCommand>),
-        _moveButton);
+            .Add(typeof(ICommandExecutor<IMoveCommand>), _moveButton);
         _buttonsByExecutorType
-        .Add(typeof(ICommandExecutor<IPatrolCommand>),
-        _patrolButton);
+            .Add(typeof(ICommandExecutor<IPatrolCommand>), _patrolButton);
         _buttonsByExecutorType
-        .Add(typeof(ICommandExecutor<IStopCommand>),
-        _stopButton);
+            .Add(typeof(ICommandExecutor<IStopCommand>), _stopButton);
         _buttonsByExecutorType
-        .Add(typeof(ICommandExecutor<IProduceUnitCommand>),
-        _produceUnitButton);
+            .Add(typeof(ICommandExecutor<IProduceUnitCommand>), _produceUnitButton);
         _buttonsByExecutorType
-        .Add(typeof(ICommandExecutor<IGatheringPoint>),
-        _gatheringPointButton);
+            .Add(typeof(ICommandExecutor<IGatheringPoint>), _gatheringPointButton);
     }
     public void BlockInteractions(ICommandExecutor ce)
     {
@@ -81,13 +75,11 @@ public class CommandButtonsView : MonoBehaviour
     /// </summary>
     /// <param name="executorInstanceType"></param>
     /// <returns></returns>
-    private GameObject GetButtonGameObjectByType(Type executorInstanceType) //TODO синтаксис на заметку!
+    private GameObject GetButtonGameObjectByType(Type executorInstanceType)
     {
         return _buttonsByExecutorType
-        .Where(type =>
-        type.Key.IsAssignableFrom(executorInstanceType))
-        .First()
-        .Value;
+            .First(type => type.Key.IsAssignableFrom(executorInstanceType))
+            .Value;
     }
 
     public void Clear()

@@ -11,13 +11,8 @@ public class MenuPresenter : MonoBehaviour
     [Inject]
     private void Init(ITimeModel timeModel)
     {
-        _backButton.OnClickAsObservable().Subscribe(_ =>
-        {
-            gameObject.SetActive(false);
-            timeModel.PauseGame();
-        });
-        _exitButton.OnClickAsObservable().Subscribe(_ =>
-        Application.Quit());
+        _backButton.OnClickAsObservable().Subscribe(_ => gameObject.SetActive(false));
+        _exitButton.OnClickAsObservable().Subscribe(_ => Application.Quit());
     }
 
 }

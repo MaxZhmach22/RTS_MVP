@@ -9,7 +9,7 @@ public class UIModelInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.Bind<CommandCreatorBase<IProduceUnitCommand>>()
-                .To<ProduceUnitCommandCommandCreator>().AsTransient();
+            .To<ProduceUnitCommandCommandCreator>().AsTransient();
         Container.Bind<CommandCreatorBase<IAttackCommand>>()
             .To<AttackCommandCommandCreator>().AsTransient();
         Container.Bind<CommandCreatorBase<IMoveCommand>>()
@@ -23,7 +23,7 @@ public class UIModelInstaller : MonoInstaller
 
         Container.Bind<CommandButtonsModel>().AsTransient();
 
-        Container.Bind<float>().WithId("Chomper").FromInstance(5f);
+        Container.Bind<float>().WithId("Chomper").FromInstance(10f);
         Container.Bind<string>().WithId("Chomper").FromInstance("Chomper");
         Container.Bind<Sprite>().WithId("Chomper").FromInstance(_chomperSprite);
 

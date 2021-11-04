@@ -8,15 +8,11 @@ public class UnitProductionTask : IUnitProductionTask
     public string UnitName { get; }
     public GameObject UnitPrefab { get; }
 
-    public UnitProductionTask(
-        float time, 
-        Sprite icon, 
-        GameObject unitPrefab, 
-        string unitName)
+    public UnitProductionTask(float time, Sprite icon, GameObject unitPrefab, string unitName)
     {
-        TimeLeft = time;
         Icon = icon;
         ProductionTime = time;
+        TimeLeft = time;
         UnitPrefab = unitPrefab;
         UnitName = unitName;
     }

@@ -1,26 +1,42 @@
 using UnityEngine;
 
-public class Chomper : MonoBehaviour, ISelectable, IAttackable
+namespace Core
 {
-    [SerializeField] private ChomperConfig _chomperConfig;
-    
-    private float _timeToSpawn;
-    public float Health { get; private set; }
-
-    public float MaxHealth { get; private set; }
-
-    public Sprite Icon { get; private set; }
-
-    public float TimeToSpawn => _timeToSpawn;
-
-    public Transform PivotPoint => throw new System.NotImplementedException();
-
-    void Start()
+    public class Chomper : MonoBehaviour, ISelectable, IAttackable, IUnit, IDamageDealer
     {
-        Health = _chomperConfig.Health;
-        MaxHealth = _chomperConfig.MaxHealth;
-        Icon = _chomperConfig.Icon;
-        _timeToSpawn = _chomperConfig.TimeToSpawn;
-    }
+        public float Health => _health;
+        public float MaxHealth => _maxHealth;
+        public Transform PivotPoint => _pivotPoint;
+        public Sprite Icon => _icon;
+        public int Damage => _damage;
 
+        [SerializeField] private Animator _animator;
+        [SerializeField] private StopCommandExecutor _stopCommand;
+        [SerializeField] private float _maxHealth = 100;
+        [SerializeField] private Sprite _icon;
+        [SerializeField] private Transform _pivotPoint;
+        [SerializeField] private int _damage = 25;
+        private float _health = 100;
+
+
+        public void RecieveDamage(int amount)
+        {
+            if (_health <= 0)
+            {
+                return;
+            }
+            _health -= amount;
+            if (_health <= 0)
+            {
+                _animator.SetTrigger("PlayDead");
+                Invoke(nameof(Destroy), 1f); //Invoke средство Unity дял вызова метода через определенное время.
+            }
+        }
+
+        private async void Destroy()
+        {
+            await _stopCommand.ExecuteSpecificCommand(new StopCommand());
+            Destroy(gameObject);
+        }
+    }
 }

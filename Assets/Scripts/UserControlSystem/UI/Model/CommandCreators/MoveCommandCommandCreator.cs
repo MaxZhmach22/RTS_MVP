@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-public class MoveCommandCommandCreator :
-CancellableCommandCreatorBase<IMoveCommand, Vector3>
+public sealed class MoveCommandCommandCreator : CancellableCommandCreatorBase<IMoveCommand, Vector3>
 {
-    protected override IMoveCommand createCommand(Vector3 argument) => new
-    MoveCommand(argument);
+    protected override IMoveCommand CreateCommand(Vector3 argument) => new MoveCommand(argument);
 }

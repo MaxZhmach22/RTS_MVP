@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Installer
   m_EditorClassIdentifier: 
   _legacyContext: {fileID: 11400000, guid: de014ed798b17b243ab6163ff2054a84, type: 2}
-  _vector3Value: {fileID: 11400000, guid: 7e41a92eae6c32343b409b9bebcf6e9d, type: 2}
-  _targetForAttack: {fileID: 11400000, guid: 895703b738d72b34f84a795cf5aa2515, type: 2}
-  _selectableValue: {fileID: 11400000, guid: b330914691cb9de4b8f2b6469a4a8927, type: 2}
-  _chomperSprite: {fileID: 21300000, guid: 86ca37d8cfe698f4b9b7fb6e9d28bc9d, type: 3}
+  _groundClicksRMB: {fileID: 11400000, guid: e4fd805d9f526e149ab0184e362bdaad, type: 2}
+  _attackableClicksRMB: {fileID: 11400000, guid: 895703b738d72b34f84a795cf5aa2515, type: 2}
+  _selectables: {fileID: 11400000, guid: b330914691cb9de4b8f2b6469a4a8927, type: 2}

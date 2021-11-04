@@ -2,12 +2,12 @@
 
 public class PatrolCommand : IPatrolCommand
 {
+    public Vector3 From { get; }
+    public Vector3 To { get; }
 
-    public Vector3 PointToPatrol { get; }
-
-    public PatrolCommand(Vector3 pointToPatrol)
+    public PatrolCommand(Vector3 @from, Vector3 to)
     {
-        PointToPatrol = pointToPatrol;
+        From = @from;
+        To = to;
     }
-
 }

@@ -6,19 +6,17 @@ using Zenject;
 public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInstaller>
 {
     [SerializeField] private AssetsContext _legacyContext;
-    [SerializeField] private Vector3Value _vector3Value;
-    [SerializeField] private AttackableValue _targetForAttack;
-    [SerializeField] private SelectableValue _selectableValue;
+    [SerializeField] private Vector3Value _groundClicksRMB;
+    [SerializeField] private AttackableValue _attackableClicksRMB;
+    [SerializeField] private SelectableValue _selectables;
+
     public override void InstallBindings()
     {
-        Container.Bind<AttackableValue>().FromInstance(_targetForAttack);
-        Container.Bind<Vector3Value>().FromInstance(_vector3Value);
-        Container.Bind<SelectableValue>().FromInstance(_selectableValue);
-        Container.Bind<IAwaitable<Vector3>>().FromInstance(_vector3Value);
-        Container.Bind<IAwaitable<IAttackable>>().FromInstance(_targetForAttack);
-        Container.Bind<IAwaitable<ISelectable>>().FromInstance(_selectableValue);
-        Container.Bind<AssetsContext>().FromInstance(_legacyContext);
-        Container.Bind<IObservable<ISelectable>>().FromInstance(_selectableValue);
-
+        Container.Bind<IAwaitable<IAttackable>>()
+            .FromInstance(_attackableClicksRMB);
+        Container.Bind<IAwaitable<Vector3>>()
+            .FromInstance(_groundClicksRMB);
+        Container.Bind<IObservable<ISelectable>>().FromInstance(_selectables);
+        Container.BindInstances(_legacyContext, _selectables);
     }
 }

@@ -30,20 +30,14 @@ public class CommandButtonsModel
         _commandIsPending = true;
         OnCommandAccepted?.Invoke(commandExecutor);
 
-        _unitProducer.ProcessCommandExecutor(commandExecutor, command =>
-        executeCommandWrapper(command, commandsQueue));
-        _attacker.ProcessCommandExecutor(commandExecutor, command => 
-        executeCommandWrapper(command, commandsQueue));
-        _stopper.ProcessCommandExecutor(commandExecutor, command => 
-        executeCommandWrapper(command, commandsQueue));
-        _mover.ProcessCommandExecutor(commandExecutor, command => 
-        executeCommandWrapper(command, commandsQueue));
-        _patroller.ProcessCommandExecutor(commandExecutor, command => 
-        executeCommandWrapper(command, commandsQueue));
-        _gatheringPoint.ProcessCommandExecutor(commandExecutor, command =>
-        executeCommandWrapper(commandExecutor, commandsQueue));
+        _unitProducer.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+        _attacker.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+        _stopper.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+        _mover.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+        _patroller.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
+        _gatheringPoint.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(command, commandsQueue));
     }
-    public void executeCommandWrapper(object command, ICommandsQueue commandsQueue)
+    public void ExecuteCommandWrapper(object command, ICommandsQueue commandsQueue)
     {
         if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift))
         {
@@ -66,6 +60,8 @@ public class CommandButtonsModel
         _stopper.ProcessCancel();
         _mover.ProcessCancel();
         _patroller.ProcessCancel();
+        _gatheringPoint.ProcessCancel();
+
         OnCommandCancel?.Invoke();
     }
 }
